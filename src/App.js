@@ -2,6 +2,8 @@ import './App.css';
 import React, {useState} from 'react';
 import axios from 'axios';
 
+import Chat from './Chat';
+
 function App() {
 
   const [file, setFile] = useState();
@@ -43,6 +45,7 @@ function App() {
         </form>
         {uploadedFile && <img src={uploadedFile} alt="Uploaded content"/>}
         {error && <p>Error uploading file: {error.message}</p>}
+        <Chat />
     </div>
   );
 }
