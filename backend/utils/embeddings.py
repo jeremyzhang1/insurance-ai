@@ -18,7 +18,7 @@ openai.api_key = os.environ["OPENAI_API_KEY"] = "sk-vZrV8wEyaXBJE1SDStpOT3BlbkFJ
 
 def gpt3_summarize(text):
     max_tokens = 3000
-    prompt=f"Summarize without losing any context: {text}"
+    prompt=f"Summarize without losing any context dont include non ascii characters: {text}"
     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
     tokens = tokenizer.encode(prompt)
     num_tokens = len(tokens)

@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify
 from utils import ocr, embeddings, database
 import logging
+from flask_cors import CORS
 
 logging.basicConfig(level=logging.INFO)
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/upload', methods=['POST'])
 def upload():

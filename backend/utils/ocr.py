@@ -10,7 +10,7 @@ def process_image(file):
         return process_direct_image(file)
 
 def process_pdf(file):
-    temp_filename = "temp_uploaded.pdf"
+    temp_filename = "src/temp_uploaded.pdf"
     file.save(temp_filename)
 
     images = convert_from_path(temp_filename)

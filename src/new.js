@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Document, Page, pdfjs } from 'react-pdf';
+import { Document, Page } from 'react-pdf';
 import Chat from './Chat';
 import './App.css';
-import workerSrc from 'pdfjs-dist/build/pdf.worker.entry.js';
-pdfjs.GlobalWorkerOptions.workerSrc = workerSrc;
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -17,18 +15,7 @@ function App() {
   const [pageNumber, setPageNumber] = useState(1);
 
   function handleChange(event) {
-    const selectedFile = event.target.files[0];
-    setFile(selectedFile);
-
-    if (selectedFile && selectedFile.type === 'application/pdf') {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setPdfPreview(reader.result);
-      };
-      reader.readAsDataURL(selectedFile);
-    } else {
-      setPdfPreview(null);
-    }
+    setFile(event.target.files[0]);
   }
 
   function onDocumentLoadSuccess({ numPages }) {
@@ -54,6 +41,13 @@ function App() {
         if (response.status === 200) {
           setUploadedFile(response.data.file);
           setStartChat(true);
+          if (file.type === 'application/pdf') {
+            const reader = new FileReader();
+            reader.onload = () => {
+              setPdfPreview(reader.result);
+            };
+            reader.readAsDataURL(file);
+          }
         } else {
           setError('Failed to upload file.');
         }
@@ -75,11 +69,11 @@ function App() {
         </div>
 
         <div className="form-container">
-          <form onSubmit={handleSubmit}>
-            <label>Choose a file to upload:</label>
-            <input type="file" onChange={handleChange} />
-            <button type="submit">Upload</button>
-          </form>
+            <form onSubmit={handleSubmit}>
+                <label>Choose a file to upload:</label>
+                <input type="file" onChange={handleChange} />
+                <button type="submit">Upload</button>
+            </form>
 
           {loading && <div className="loading">Loading...</div>}
           {pdfPreview && (
