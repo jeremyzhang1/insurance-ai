@@ -1,6 +1,6 @@
 # 🚀 **Insurance DocuMentor**
 
-Welcome to **Insurance DocuMentor**, a state-of-the-art web application that transforms the way users interact with their insurance documents. By leveraging advanced OCR, local embedding bases, and LLMs **Insurance DocuMentor** not only serves as a insurance benefit comprehension tool but provides enlightening recommendations in an accessible chat format.
+Welcome to **Insurance DocuMentor**, a state-of-the-art web application that transforms the way users interact with their insurance documents. By leveraging advanced OCR, local embedding bases, and LLMs **Insurance DocuMentor** not only serves as a insurance benefit comprehension tool but provides enlightening recommendations in an accessible chat format. **EF AI Hackathon Winner**
 
 ## 🌟 **Features**:
 
