@@ -53,7 +53,7 @@ Welcome to **Insurance DocuMentor**, a state-of-the-art web application that tra
     npm start
     ```
 
-3. 🎉 **Celebrate**: Simply navigate to `http://localhost:3000` in your favorite browser and bask in the brilliance of **Insurance DocuMentor**!
+3. 🎉 **Celebrate**: Simply navigate to `http://localhost:3000` in your favorite browser!
 
 ## 📖 **Usage**:
 
