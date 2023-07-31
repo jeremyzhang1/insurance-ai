@@ -79,7 +79,7 @@ function App() {
           {pdfPreview && (
             <div className="preview-container">
               <Document
-                file={pdfPreview} // Use the blob URL for the file
+                file={pdfPreview} 
                 onLoadSuccess={onDocumentLoadSuccess}
                 onLoadError={(error) => setError(error)}
               >

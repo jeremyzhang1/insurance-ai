@@ -3,6 +3,7 @@ from transformers import BertTokenizer, BertForQuestionAnswering, BertModel, Ber
 import openai
 import os
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from config import OPENAI_API_KEY
 
 MAX_LEN = 40
 
@@ -12,9 +13,8 @@ model_qa = BertForQuestionAnswering.from_pretrained("bert-large-uncased-whole-wo
 tokenizer_ner = BertTokenizer.from_pretrained("dbmdz/bert-large-cased-finetuned-conll03-english")
 model_ner = BertForTokenClassification.from_pretrained("dbmdz/bert-large-cased-finetuned-conll03-english")
 
-model = "text-davinci-002"
-openai.api_key = os.environ["OPENAI_API_KEY"] = "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"
-
+model = "text-davinci-003"
+openai.api_key = os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 
 def gpt3_summarize(text):
     max_tokens = 3000
@@ -34,8 +34,6 @@ def gpt3_summarize(text):
         max_tokens=100
     )
     return response.choices[0].text
-
-
 
 def create_embedding(text):
     inputs = tokenizer_bert(text, return_tensors="pt", truncation=True, padding=True, max_length=MAX_LEN)
@@ -62,7 +60,6 @@ def extract_entities(tokens, predictions):
                 current_chunk = []
     return chunks
 
-
 def ner_chunk(text):
     tokenized_text = tokenizer_ner.tokenize(text)
     print("Tokenized Text:", tokenized_text)
@@ -84,12 +81,12 @@ def ner_chunk(text):
 
     return chunks
 
-
 '''
 def simple_chunk(text):
     chunks = [text[i:i+MAX_LEN] for i in range(0, len(text), MAX_LEN)]
     return chunks
 '''
+
 def simple_chunk(text):
     chunks = [text[i:i+MAX_LEN] for i in range(0, len(text), MAX_LEN)]
     summaries = []
@@ -109,13 +106,11 @@ def simple_chunk(text):
     print("All Chunks Processed.")
     return summaries
 
-
 def chunk_and_embed(text):
     #print(text)
     chunks = simple_chunk(text)
     chunk_embeddings = [create_embedding(chunk) for chunk in chunks]
     return chunks, chunk_embeddings
-
 
 def get_qa_embedding(question, context):
     inputs = tokenizer_bert(question, context, return_tensors="pt", truncation=True, padding=True, max_length=MAX_LEN)

@@ -1,7 +1,9 @@
 import pinecone
 import logging
-pinecone.init(api_key="fedcf13e-6b3e-4104-ae6d-00767426ae05", environment="us-west4-gcp-free")
-index_name = "insurancedocuments"
+from config import PINECONE_API_KEY, PINECONE_ENVIRONMENT, INDEX_NAME
+
+pinecone.init(api_key=PINECONE_API_KEY, environment=PINECONE_ENVIRONMENT)
+index_name = INDEX_NAME
 
 '''
 def initialize_index():
@@ -38,7 +40,7 @@ def store_in_db(chunks, chunk_embeddings):
         
         formatted_vectors.append((chunk_id, embedding.tolist(), {}))
 
-    pinecone.init(api_key="fedcf13e-6b3e-4104-ae6d-00767426ae05", environment="us-west4-gcp-free")
+    pinecone.init(api_key=PINECONE_API_KEY, environment=PINECONE_ENVIRONMENT)
     if index_name in pinecone.list_indexes():
         index = pinecone.Index(index_name)
     else:
@@ -56,6 +58,6 @@ def query_db(query_embedding, top_k=5):
     return query_result
 '''
 def delete_index():
-    pinecone.init(api_key="fedcf13e-6b3e-4104-ae6d-00767426ae05", environment="us-west4-gcp-free")
+    pinecone.init(api_key=PINECONE_API_KEY, environment=PINECONE_ENVIRONMENT)
     pinecone.delete_index(index_name)
     pinecone.deinit()

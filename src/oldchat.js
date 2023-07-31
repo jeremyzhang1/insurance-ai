@@ -5,7 +5,7 @@ import SendIcon from '@mui/icons-material/Send';
 import './Chat.css';
 
 const Chat = () => {
-  const [messages, setMessages] = useState([{ text: "Hello! How can I assist you with your insurance plan summary of benefits and coverage statement with insurance company 1?", sender: 'AI' }]);
+  const [messages, setMessages] = useState([{ text: "Hello! How can I assist you with your insurance documents?", sender: 'AI' }]);
   const [input, setInput] = useState('');
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -42,53 +42,60 @@ const Chat = () => {
       <Grid container spacing={2}>
         {messages.map((message, index) => (
           <Grid item xs={12} key={index}>
-            <Card className={`message-card ${message.sender.toLowerCase()}`}>
-    <CardContent className="message-card-content">
-        <Typography color={message.sender === 'User' ? "text.primary" : "text.secondary"} gutterBottom>
-            {message.sender}
-        </Typography>
-        <Typography variant="body2" style={{ color: message.sender === 'User' ? 'white' : 'black' }}>
-            {message.text}
-        </Typography>
-        {message.image && 
-            <img src={`http://localhost:5000/static/${message.image}`} alt="AI response" />}
-    </CardContent>
-</Card>
-
+            <Card
+              sx={{
+                bgcolor: message.sender === 'User' ? '#e1f5fe' : '#f5f5f5',
+                boxShadow: 3,
+                p: 2,
+                borderRadius: 8,
+                ml: message.sender === 'User' ? 'auto' : '0',
+                mr: message.sender === 'AI' ? 'auto' : '0',
+              }}
+            >
+              <CardContent>
+                <Typography color="text.secondary" variant="subtitle2" gutterBottom>
+                  {message.sender}
+                </Typography>
+                <Typography variant="body1">
+                  {message.text}
+                </Typography>
+                {message.image && <img src={`http://localhost:5000/static/${message.image}`} alt="AI response" style={{ marginTop: '10px', borderRadius: '8px' }} />}
+              </CardContent>
+            </Card>
           </Grid>
         ))}
         {isLoading && (
-          <Grid item xs={12}>
-            <Typography color="text.secondary" gutterBottom>
+          <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <CircularProgress color="primary" />
+            <Typography color="text.secondary" variant="subtitle2" sx={{ marginLeft: '10px' }}>
               AI is typing...
             </Typography>
-            <CircularProgress />
           </Grid>
         )}
       </Grid>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={{ marginTop: '20px' }}>
         <TextField
           value={input}
           onChange={handleInputChange}
           fullWidth
-          margin="normal"
-          label="Type your message here..."
           variant="outlined"
+          label="Type your message here..."
           size="small"
-          autoFocus 
+          autoFocus
         />
-        <CardActions>
+        <CardActions style={{ justifyContent: 'flex-end', marginTop: '10px' }}>
           <Button
             type="submit"
             color="primary"
             endIcon={<SendIcon />}
-            disabled={isLoading || !input.trim()} 
+            disabled={isLoading || !input.trim()}
+            variant="contained"
           >
             Send
           </Button>
         </CardActions>
       </form>
-      {error && <Typography color="error">{error}</Typography>}
+      {error && <Typography color="error" sx={{ marginTop: '10px' }}>{error}</Typography>}
     </Box>
   );
 };

@@ -1,3 +1,12 @@
 pinecone
 transformers 
 torch
+react
+openai
+os
+concurrent.futures
+axios
+pytesseract
+PIL
+pdf2image
+logging
