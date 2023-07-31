@@ -1,6 +1,6 @@
 # 🚀 **Insurance DocuMentor**
 
-Welcome to **Insurance DocuMentor**, a state-of-the-art web application that transforms the way users interact with their insurance documents. By leveraging advanced OCR (Optical Character Recognition) and groundbreaking AI capabilities, **Insurance DocuMentor** not only deciphers documents but provides enlightening insights in an interactive chat format.
+Welcome to **Insurance DocuMentor**, a state-of-the-art web application that transforms the way users interact with their insurance documents. By leveraging advanced OCR, local embedding bases, and LLMs **Insurance DocuMentor** not only serves as a insurance benefit comprehension tool but provides enlightening recommendations in an accessible chat format.
 
 ## 🌟 **Features**:
 
@@ -8,30 +8,45 @@ Welcome to **Insurance DocuMentor**, a state-of-the-art web application that tra
   
 - **🔍 Dynamic Information Retrieval**: Gone are the days of endless searching. Our app meticulously extracts and processes content, putting information at your fingertips.
 
-- **💬 AI-Driven Interactive Chat**: Ever wished for a knowledgeable assistant? Engage with our AI chatbot, which draws from the document's essence to deliver precise answers to your queries.
+- **💬 AI-Driven Interactive Chat**: Ever wished for a knowledgeable assistant? Engage with our AI chatbot, which draws from the document's essence to deliver precise answers to your queries. 
 
 ## 🛠 **Tech Stack**:
 
 ### 🔧 Backend:
   - **Flask (Python)**:
-    - Masterful OCR Processing
-    - Integration with the Pinecone database for lightning-fast data retrieval
-    - Synchronized with GPT-3 for nuanced, intelligent conversation
+    - OCR Processing with PyTesseract
+    - Finetuned Named Entity Recognition and Topic Modeling
+    - Integration with the Pinecone cloud database 
+    - Synchronized with GPT-3
+    - Concurrency with ThreadPoolExecutor
   
 ### 🎨 Frontend:
   - **React (JavaScript)**:
-    - Leveraging MUI for a sleek, responsive user interface
+    -  MUI, responsive user interface
 
 ## 🚀 **Getting Started**:
 
-1. **🔧 Boot Up the Backend**:
+
+1. **🌍 Environment Setup and Configuration**:
+
+   Navigate to your `backend_directory` and create a file named `config.py`. This file will hold various configuration keys and settings that the backend relies on.
+
+   Add the following content to `config.py`:
+   
+   ```python
+   OPENAI_API_KEY = "YOUR_OPENAI_API_KEY_HERE"
+   PINECONE_API_KEY = "YOUR_PINECONE_API_KEY_HERE"
+   PINECONE_ENVIRONMENT = "YOUR_PINECONE_ENVIRONMENT_HERE"
+   INDEX_NAME = "YOUR_INDEX_NAME_HERE"
+
+2. **🔧 Boot Up the Backend**:
     ```bash
     cd backend_directory
     pip install -r requirements.txt
     python app.py
     ```
 
-2. **🎨 Light Up the Frontend**:
+3. **🎨 Light Up the Frontend**:
     ```bash
     cd frontend_directory
     npm install
